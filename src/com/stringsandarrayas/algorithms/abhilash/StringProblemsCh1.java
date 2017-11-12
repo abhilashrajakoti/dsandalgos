@@ -10,13 +10,15 @@ public class StringProblemsCh1 {
 		// System.out.println(firstNonRepeated("abbhillasshrrajjakkootti"));
 		// System.out.println("bhlsh rjkt".equals(removeCharacters("abhilash rajakoti",
 		// "aeiou")));
-		//String string = new String("try to do or not to do,but no to try");
-		//System.out.println(string);
-		//char[] str = string.toCharArray();
-		//reverseWordsV2(str);
-		//System.out.println(str);
-		char[] strArray="-2396805".toCharArray();
-        System.out.println(stringToint(strArray));
+		// String string = new String("try to do or not to do,but no to try");
+		// System.out.println(string);
+		// char[] str = string.toCharArray();
+		// reverseWordsV2(str);
+		// System.out.println(str);
+		//char[] strArray = "-2396805".toCharArray();
+		//System.out.println(stringToint(strArray));
+		int value=-65435;
+		System.out.println(intToString(value));
 	}
 
 	// find the first non repeated character in a string
@@ -97,16 +99,16 @@ public class StringProblemsCh1 {
 	}
 
 	public static boolean reverseWordsV2(char[] str) {
-		int strLength=str.length,start=0,end=0;
-		reverseString(str,0,strLength-1);
-		while(end<strLength) {
-			if(str[end]==' ')
+		int strLength = str.length, start = 0, end = 0;
+		reverseString(str, 0, strLength - 1);
+		while (end < strLength) {
+			if (str[end] == ' ')
 				end++;
 			else {
-				start=end;
-				while(end<strLength && str[end]!=' ')
+				start = end;
+				while (end < strLength && str[end] != ' ')
 					end++;
-				reverseString(str, start, end-1);
+				reverseString(str, start, end - 1);
 			}
 		}
 		return true;
@@ -114,33 +116,57 @@ public class StringProblemsCh1 {
 
 	public static void reverseString(char[] str, int start, int end) {
 		char temp;
-		while(end>start) {
-			temp=str[start];
-			str[start]=str[end];
-			str[end]=temp;
+		while (end > start) {
+			temp = str[start];
+			str[start] = str[end];
+			str[end] = temp;
 			start++;
 			end--;
 		}
-		
+
 	}
-	
+
 	public static int stringToint(char[] str) {
-		int strLength=str.length;
-		int sum=0;int start=0;
-		boolean neg=false;
-		if(str[start]=='-') {
-			neg=true;
-			start=1;
+		int strLength = str.length;
+		int sum = 0;
+		int start = 0;
+		boolean neg = false;
+		if (str[start] == '-') {
+			neg = true;
+			start = 1;
 		}
-		while(start<strLength) {
-			sum=sum*10;
-			sum=sum+(str[start]-'0');
+		while (start < strLength) {
+			sum = sum * 10;
+			sum = sum + (str[start] - '0');
 			start++;
 		}
-		if(neg) {
-			sum=-sum;
+		if (neg) {
+			sum = -sum;
 		}
 		return sum;
+	}
+
+	public static String intToString(int value) {
+		final int MAX_DIGITS = 10;
+		boolean neg = false;
+		char[] buffer = new char[MAX_DIGITS];
+		int i = 0;
+		if (value < 0) {
+			neg = true;
+			value = -value;
+		}
+		do {
+			buffer[i++] = (char) (value % 10 + '0');
+			value = value / 10;
+		} while (value != 0);
+		StringBuilder sb = new StringBuilder("");
+		if (neg) {
+			sb.append("-");
+		}
+		while (i > 0) {
+			sb.append(buffer[--i]);
+		}
+		return sb.toString();
 	}
 
 }
